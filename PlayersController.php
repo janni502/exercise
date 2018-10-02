@@ -1,5 +1,5 @@
 <?php
-include("Player.php");
+include("Players.php");
 include("PlayersView.php");
 
 interface IPlayersControler {
@@ -38,6 +38,9 @@ class PlayersControler implements IPlayersControler {
             case 'file':
                 $playerData = $this->playersObject->getPlayerDataFromFile($filename);
                 break;
+            default:
+                throw new \Exception(sprintf('source is not json, array, or file'));
+
         }
 
         if (is_string($playerData)) {
@@ -64,6 +67,8 @@ class PlayersControler implements IPlayersControler {
             case 'file':
                 $this->playersObject->setPlayerDataFromFile($player,$filename);
                 break;
+            default:
+                throw new \Exception(sprintf('source is not json, array, or file'));
         }
     }
 
@@ -96,8 +101,10 @@ $playersControler = new PlayersControler();
 
 $playersControler->writePlayer('json',$player);
 $playersControler->writePlayer('array',$player);
-$playersControler->writePlayer('file',$player,'tempjson.json');
+$playersControler->writePlayer('file',$player,'playerdata.json');
 
-$playersControler->display(php_sapi_name() === 'cli','json');
+$playersControler->display(php_sapi_name() === 'cli','array');
+// $playersControler->display(php_sapi_name() === 'cli','json');
+// $playersControler->display(php_sapi_name() === 'cli','file','playerdata.json');
 
 ?>    
