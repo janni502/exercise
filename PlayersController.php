@@ -103,8 +103,8 @@ $playersControler->writePlayer('json',$player);
 $playersControler->writePlayer('array',$player);
 $playersControler->writePlayer('file',$player,'playerdata.json');
 
-$playersControler->display(php_sapi_name() === 'cli','array');
+// $playersControler->display(php_sapi_name() === 'cli','array');
 // $playersControler->display(php_sapi_name() === 'cli','json');
-// $playersControler->display(php_sapi_name() === 'cli','file','playerdata.json');
+$playersControler->display(php_sapi_name() === 'cli','file','playerdata.json');
 
 ?>    
